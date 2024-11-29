@@ -1,0 +1,46 @@
+﻿@model BookShopLKL.Models.Product
+<li>
+    <figure>
+        <a class="aa-product-img" href="@Url.Action("ViewDetails", "Product1", new { id = Model.ProductID })">
+            <img id="firstImage" src="@Url.Content(Model.PicturePath)" alt="" class="img-fluid img-thumbnail" style="max-height: 1939px; width: auto; object-fit: contain;">
+            @*<img id="firstImage" src="@Url.Content(Model.PicturePath)" alt="" class="img-fluid img-thumbnail">
+        <script>
+            // Sau khi trang tải xong, lấy kích thước ảnh đầu tiên
+            window.onload = function () {
+                const firstImage = document.getElementById('firstImage');
+                if (firstImage) {
+                    const firstImageWidth = firstImage.clientWidth;
+                    const firstImageHeight = firstImage.clientHeight;
+
+                    // Áp dụng kích thước ảnh đầu tiên cho tất cả các ảnh khác
+                    const images = document.querySelectorAll('.img-fluid.img-thumbnail');
+                    images.forEach((img, index) => {
+                        if (index !== 0) { // Không áp dụng cho ảnh đầu tiên
+                            img.style.width = firstImageWidth + 'px';
+                            img.style.height = firstImageHeight + 'px';
+                            img.style.objectFit = 'cover'; // Giữ tỷ lệ ảnh, không bị méo
+                        }
+                    });
+                }
+            }
+        </script>*@
+        </a>
+        <a class="aa-add-card-btn" href="@(Session["username"] != null ? Url.Action("AddToCart", "Product1", new { id = @Model.ProductID}) : Url.Action("Login", "Account"))"><span class="fa fa-shopping-cart"></span>Thêm vào giỏ hàng</a>
+        @*<figcaption>
+            <h4 class="aa-product-title"><a href="#">@Model.Name</a></h4>
+            <span class="aa-product-price">@Model.UnitPrice.ToString("N0")₫</span><span class="aa-product-old-price">
+                                                                                      <del>
+                                                                                          @if (Model.OldPrice != null)
+                                                                                          {
+                                                                                              <text>@($"{Model.OldPrice:N0}₫")</text>
+                                                                                          }
+                                                                                      </del>
+            </span>
+        </figcaption>*@
+    </figure>
+    <div class="aa-product-hvr-content">
+        <a href="@(Session["username"]!=null ? Url.Action("WishList","Product1", new {id=@Model.ProductID }) :Url.Action("Login","Account"))" data-toggle="tooltip" data-placement="top" title="Thêm vào danh sách ưa thích"><span class="fa fa-heart-o"></span></a>
+        <a href="@Url.Action("ViewDetails", "Product1", new { id = Model.ProductID })" title="Xem chi tiết" data-toggle="tooltip" data-placement="top"><span class="fa fa-info"></span></a>
+    </div>
+</li>
+

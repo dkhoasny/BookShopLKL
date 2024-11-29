@@ -1,0 +1,80 @@
+﻿@model IEnumerable<BookShopLKL.Models.Order>
+
+@{
+    ViewBag.Title = "Order";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-12">
+
+        <table class="table table-bordered table-hover table-striped">
+            <tr>
+                <th>
+                    Mã đơn hàng
+                </th>
+                <th>
+                    Mã khách hàng
+                </th>
+                <th>
+                    Mã thanh toán
+                </th>
+                <th>
+                    Mã giao hàng
+                </th>
+                <th>
+                    Giảm giá
+                </th>
+                <th>
+                    Thuế
+                </th>
+                <th>
+                    Tổng tiền
+                </th>
+                <th>
+                    Ngày đặt hàng
+                </th>
+                <th>Các hành động</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Customer.CustomerID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Payment.PaymentID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ShippingDetail.ShippingID)
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.Discount)*@
+                        @(item.Discount.HasValue ? String.Format("{0:N0} VNĐ", item.Discount.Value) : "N/A")
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.Taxes)*@
+                        @(item.Taxes.HasValue ? String.Format("{0:N0} VNĐ", item.Taxes.Value) : "0 VNĐ")
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(modelItem => item.TotalAmount.HasValue ? String.Format("{0:N0} VNĐ", item.TotalAmount.Value) : "N/A")*@
+                        @(item.TotalAmount.HasValue ? String.Format("{0:N0} VNĐ", item.TotalAmount.Value) : "N/A")
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderDate)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Xem chi tiết", "Details", new { id = item.OrderID }, new { @class = "btn btn-info" })
+                    </td>
+                </tr>
+            }
+        </table>
+
+    </div>
+
+</div>
+
+

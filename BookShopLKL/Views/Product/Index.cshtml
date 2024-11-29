@@ -1,0 +1,50 @@
+﻿@model IEnumerable<BookShopLKL.Models.Product>
+@{
+    ViewBag.Title = "Thông tin sản phẩm";
+}
+
+<div class="row">
+    <div class="col">
+        <h2 class="text-info">Danh sách sản phẩm</h2>
+        @*<hr />*@
+        <div class="d-flex justify-content-end mb-2">
+            <a href="@Url.Action("Create", "Product")" class="btn btn btn-outline-primary"><i class="fa-regular fa-square-plus fs-1">Thêm</i></a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-condensed table-hover table-bordered table-striped table">
+                <thead>
+                    <tr>
+                        <th>Tên sản phẩm</th>
+                        <th>Nhà cung cấp</th>
+                        <th>Danh mục</th>
+                        @*<th>@Html.DisplayNameFor(p => p.SubCategoryID)</th>*@
+                        <th>Giá tiền</th>
+                        <th>Hàng tồn</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var pdt in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(p => pdt.Name)</td>
+                            <td>@Html.DisplayFor(p => pdt.Supplier.CompanyName)</td>
+                            <td>@Html.DisplayFor(p => pdt.Category.Name)</td>
+                            @*<td>@Html.DisplayFor(p => pdt.SubCategory.Name)</td>*@
+                            @*<td>@Html.DisplayFor(p => pdt.UnitPrice)</td>*@
+                            <td>@pdt.UnitPrice.ToString("N0") VNĐ</td>
+                            <td>@Html.DisplayFor(p => pdt.UnitInStock)</td>
+                            <td>
+                                <a href="@Url.Action("Edit", "Product", new {id = pdt.ProductID })" class="btn btn-outline-warning btn-sm"><i class="fa-solid fa-pen-to-square fs-4">Sửa</i></a>
+                                <a href="@Url.Action("Details", "Product", new {id = pdt.ProductID })" class="btn btn-outline-info btn-sm"><i class="fa-regular fa-circle-info fs-4">Xem</i></a>
+                                <a href="@Url.Action("Delete", "Product", new {id = pdt.ProductID })" class="btn btn-outline-danger btn-sm"><i class="fa-regular fa-trash-arrow-up fs-4">Xóa</i></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

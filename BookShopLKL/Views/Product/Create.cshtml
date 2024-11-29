@@ -1,0 +1,192 @@
+﻿@model BookShopLKL.Models.ProductVM
+@{
+    ViewBag.Title = "Add New Product";
+}
+
+<div class="row">
+    <div class="col">
+        <h2 class="text-info">Thêm mới sản phẩm</h2>
+        <hr />
+        <div class="col-md-12">
+            @using (Ajax.BeginForm(new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "msg", OnComplete = "clearAll" }))
+            {
+                @Html.AntiForgeryToken()
+                <div class="row mb-2">
+                    <div id="msg">
+
+                    </div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-md-12">
+                        @Html.LabelFor(x => x.Name, new { @class = "form-label fs-4" })
+                        @Html.TextBoxFor(x => x.Name, new { @class = "form-control fs-4" })
+                        @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-12">
+                        @Html.LabelFor(x => x.SupplierID, new { @class = "form-label fs-4" })
+                        @Html.DropDownListFor(x => x.SupplierID, ViewBag.supplierList as SelectList, "***Chọn Nhà cung cấp***", new { @class = "form-control fs-4" })
+                        @Html.ValidationMessageFor(x => x.SupplierID, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-6">
+                        @Html.LabelFor(x => x.CategoryID, new { @class = "form-label fs-4" })
+                        @Html.DropDownListFor(x => x.CategoryID, ViewBag.categoryList as SelectList, "***Chọn Danh mục***", new { @class = "form-control fs-4", id = "categoryDropdown" })
+                        @Html.ValidationMessageFor(x => x.CategoryID, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(x => x.SubCategoryID, new { @class = "form-label fs-4" })
+                        @Html.DropDownListFor(x => x.SubCategoryID, new SelectList(Enumerable.Empty<SelectListItem>()), "***Chọn Danh mục con***", new { @class = "form-control fs-4", id = "subCategoryDropdown", disabled = "disabled" })
+                        @Html.ValidationMessageFor(x => x.SubCategoryID, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(x => x.UnitPrice, new { @class = "form-label fs-4" })
+                        @Html.TextBoxFor(x => x.UnitPrice, new { @class = "form-control fs-4", Type = "money", id = "unitPrice", data_val = "true" })
+                        @Html.ValidationMessageFor(x => x.UnitPrice, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(x => x.OldPrice, new { @class = "form-label fs-4" })
+                        @Html.TextBoxFor(x => x.OldPrice, new { @class = "form-control fs-4", id = "oldPrice", data_val = "true" })
+                        @Html.ValidationMessageFor(x => x.OldPrice, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(x => x.ShortDescription, new { @class = "form-label fs-4" })
+                        @Html.TextAreaFor(x => x.ShortDescription, new { @class = "form-control fs-4" })
+                        @Html.ValidationMessageFor(x => x.ShortDescription, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(x => x.UnitInStock, new { @class = "form-label fs-4" })
+                        @Html.TextBoxFor(x => x.UnitInStock, new { @class = "form-control fs-4" })
+                        @Html.ValidationMessageFor(x => x.UnitInStock, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-md-6">
+                        @Html.LabelFor(x => x.Picture, new { @class = "form-label fs-4" })
+                        @*@Html.TextBoxFor(x => x.Picture, new { @class = "form-control fs-4", Type = "file" })*@
+                        <div class="input-group mb-3">
+                            <!-- Nút tùy chỉnh chọn tệp -->
+                            <label for="file-upload" class="btn btn-primary fs-4">Chọn tệp tin</label>
+                            <!-- Input file ẩn -->
+                            @Html.TextBoxFor(x => x.Picture, new { @class = "form-control fs-4", type = "file", id = "file-upload", style = "display:none;" })
+                            <!-- Hiển thị tên tệp tin -->
+                            <input type="text" id="file-name" class="form-control fs-4" value="Chưa có tệp tin nào được chọn" readonly />
+                        </div>
+                        <!-- JavaScript -->
+                        <script>
+                            document.getElementById('file-upload').addEventListener('change', function () {
+                                var fileName = this.files[0] ? this.files[0].name : "Chưa có tệp tin nào được chọn";
+                                document.getElementById('file-name').value = fileName;
+                            });
+                        </script>
+                        @Html.ValidationMessageFor(x => x.Picture, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="col-md-6 mt-4">
+                        <button type="submit" class="btn btn-success btn-lg col-12 mt-4"><i class="fa-regular fa-floppy-disk fs-4"></i> Lưu</button>
+                    </div>
+                </div>
+
+                @*<div class="col-md-6 d-flex justify-content-lg-end mt-4">
+                        <button type="submit" class="btn btn-success btn-lg col-4"><i class="fa-regular fa-floppy-disk fs-4"></i> Save</button>
+                    </div>*@
+            }
+
+            <div class="col-md-12 d-flex justify-content-lg-start mt-3">
+                <a href="@Url.Action("Index", "Product")" class="btn btn-danger btn-sm fs-4"><i class="fa-regular fa-hand-back-point-left"></i> Trở về</a>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts {
+    <script src="~/Content/JS/jquery-3.6.0.js"></script>
+    <script src="~/Content/JS/jquery.validate.js"></script>
+    <script src="~/Content/JS/jquery.validate.unobtrusive.js"></script>
+    <script src="~/Content/JS/jquery.unobtrusive-ajax.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Format the UnitPrice as user types
+            $('#unitPrice').on('input', function () {
+                var value = $(this).val();
+                value = value.replace(/[^\d]/g, ''); // Remove non-numeric characters
+                value = value.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,'); // Add commas
+                $(this).val(value); // Update the field value
+            });
+
+            $('#oldPrice').on('input', function () {
+                var value = $(this).val();
+                value = value.replace(/[^\d]/g, ''); // Remove all non-numeric characters
+                value = value.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,'); // Add commas every 3 digits
+                $(this).val(value); // Update the value in the input field
+            });
+
+            // On form submission, remove commas before sending the value
+            $('form').on('submit', function () {
+                var unitPriceValue = $('#unitPrice').val();
+                var oldPriceValue = $('#oldPrice').val();
+                $('#unitPrice').val(unitPriceValue.replace(/,/g, '')); // Remove commas before submitting
+                $('#oldPrice').val(oldPriceValue.replace(/,/g, '')); // Remove commas from OldPrice
+            });
+
+            // Load SubCategories when Category is selected
+            @*$('#categoryDropdown').change(function () {
+                var categoryId = $(this).val();
+
+                if (categoryId) {
+                    $.ajax({
+                        url: '@Url.Action("GetSubCategories", "Product")',
+                        data: { categoryId: categoryId },
+                        type: 'GET',
+                        success: function (data) {
+                            var subCategoryDropdown = $('#subCategoryDropdown');
+                            subCategoryDropdown.empty(); // Clear previous items
+                            subCategoryDropdown.append('<option value="">***Select SubCategory***</option>'); // Add default option
+                            $.each(data, function (i, item) {
+                                subCategoryDropdown.append('<option value="' + item.SubCategoryID + '">' + item.Name + '</option>');
+                            });
+                        }
+                    });
+                } else {
+                    // If no category selected, clear SubCategory dropdown
+                    $('#subCategoryDropdown').empty();
+                    $('#subCategoryDropdown').append('<option value="">***Select SubCategory***</option>');
+                }
+            });*@
+            // Disable SubCategory dropdown initially
+            $('#subCategoryDropdown').prop('disabled', true);
+
+            // Load SubCategories when Category is selected
+            $('#categoryDropdown').change(function () {
+                var categoryId = $(this).val();
+
+                if (categoryId) {
+                    // Enable SubCategory dropdown if a Category is selected
+                    $('#subCategoryDropdown').prop('disabled', false);
+
+                    $.ajax({
+                        url: '@Url.Action("GetSubCategories", "Product")',
+                        data: { categoryId: categoryId },
+                        type: 'GET',
+                        success: function (data) {
+                            var subCategoryDropdown = $('#subCategoryDropdown');
+                            subCategoryDropdown.empty(); // Clear previous items
+                            subCategoryDropdown.append('<option value="">***Select SubCategory***</option>'); // Add default option
+                            $.each(data, function (i, item) {
+                                subCategoryDropdown.append('<option value="' + item.SubCategoryID + '">' + item.Name + '</option>');
+                            });
+                        }
+                    });
+                } else {
+                    // If no category selected, clear and disable SubCategory dropdown
+                    $('#subCategoryDropdown').empty();
+                    $('#subCategoryDropdown').append('<option value="">***Select SubCategory***</option>');
+                    $('#subCategoryDropdown').prop('disabled', true);
+                }
+            });
+
+            $("#form0").attr("enctype", "multipart/form-data");
+
+            function clearAll() {
+                $("#form0").trigger("reset");
+            }
+        });
+    </script>
+}
+

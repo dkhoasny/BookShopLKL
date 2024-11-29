@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="354e11e4134f44ac9d4bf7b9c9628ea8" Name="Diagram1">
+        <EntityTypeShape EntityType="BookShopLKLModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopLKLModel.admin_Employee" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopLKLModel.admin_Login" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopLKLModel.Category" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopLKLModel.Customer" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopLKLModel.genMainSlider" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopLKLModel.genPromoRight" Width="1.5" PointX="6.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopLKLModel.OrderDetail" Width="1.5" PointX="6.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopLKLModel.Order" Width="1.5" PointX="8.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopLKLModel.Payment" Width="1.5" PointX="4.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopLKLModel.PaymentType" Width="1.5" PointX="8.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopLKLModel.Product" Width="1.5" PointX="6.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopLKLModel.RecentlyView" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopLKLModel.Review" Width="1.5" PointX="10.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopLKLModel.Role" Width="1.5" PointX="0.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopLKLModel.ShippingDetail" Width="1.5" PointX="10.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopLKLModel.SubCategory" Width="1.5" PointX="10.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopLKLModel.Supplier" Width="1.5" PointX="10.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookShopLKLModel.Wishlist" Width="1.5" PointX="12.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="BookShopLKLModel.FK_dbo_admin_Login_dbo_admin_Employee_EmpID" />
+        <AssociationConnector Association="BookShopLKLModel.FK_dbo_admin_Login_dbo_Roles_Role_RoleID" />
+        <AssociationConnector Association="BookShopLKLModel.FK_dbo_genPromoRights_dbo_Categories_CategoryID" />
+        <AssociationConnector Association="BookShopLKLModel.FK_dbo_Products_dbo_Categories_CategoryID" />
+        <AssociationConnector Association="BookShopLKLModel.FK_dbo_SubCategories_dbo_Categories_CategoryID" />
+        <AssociationConnector Association="BookShopLKLModel.FK_dbo_Orders_dbo_Customers_CustomerID" />
+        <AssociationConnector Association="BookShopLKLModel.FK_dbo_RecentlyViews_dbo_Customers_CustomerID" />
+        <AssociationConnector Association="BookShopLKLModel.FK_dbo_Reviews_dbo_Customers_CustomerID" />
+        <AssociationConnector Association="BookShopLKLModel.FK_dbo_Wishlists_dbo_Customers_CustomerID" />
+        <AssociationConnector Association="BookShopLKLModel.FK_dbo_OrderDetails_dbo_Orders_OrderID" />
+        <AssociationConnector Association="BookShopLKLModel.FK_dbo_OrderDetails_dbo_Products_ProductID" />
+        <AssociationConnector Association="BookShopLKLModel.FK_dbo_Orders_dbo_Payments_PaymentID" />
+        <AssociationConnector Association="BookShopLKLModel.FK_dbo_Orders_dbo_ShippingDetails_ShippingID" />
+        <AssociationConnector Association="BookShopLKLModel.FK_dbo_Payments_dbo_PaymentTypes_PaymentType_PayTypeID" />
+        <AssociationConnector Association="BookShopLKLModel.FK_dbo_Products_dbo_SubCategories_SubCategoryID" />
+        <AssociationConnector Association="BookShopLKLModel.FK_dbo_Products_dbo_Suppliers_SupplierID" />
+        <AssociationConnector Association="BookShopLKLModel.FK_dbo_RecentlyViews_dbo_Products_ProductID" />
+        <AssociationConnector Association="BookShopLKLModel.FK_dbo_Reviews_dbo_Products_ProductID" />
+        <AssociationConnector Association="BookShopLKLModel.FK_dbo_Wishlists_dbo_Products_ProductID" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
